@@ -66,10 +66,77 @@
       "inverter_state": {
         "name": "Inverter Status",
         "state": {
+          "sleeping": "Sleeping",
           "offline": "Offline",
           "standby": "Standby",
           "generating": "Generating"
         }
+      },
+      "fault_description": {
+        "name": "Fault/Status Description"
+      },
+      "insulation_resistance": {
+        "name": "Insulation Resistance"
+      },
+      "grid_active_power": {
+        "name": "Grid Active Power"
+      },
+      "grid_meter_voltage": {
+        "name": "Grid Meter Voltage"
+      },
+      "grid_meter_current": {
+        "name": "Grid Meter Current"
+      },
+      "reactive_power": {
+        "name": "Reactive Power"
+      },
+      "power_factor": {
+        "name": "Power Factor"
+      },
+      "grid_import_today": {
+        "name": "Grid Import Today"
+      },
+      "grid_import_month": {
+        "name": "Grid Import This Month"
+      },
+      "grid_import_year": {
+        "name": "Grid Import This Year"
+      },
+      "grid_import_total": {
+        "name": "Grid Import Lifetime"
+      },
+      "grid_export_today": {
+        "name": "Grid Export Today"
+      },
+      "grid_export_month": {
+        "name": "Grid Export This Month"
+      },
+      "grid_export_year": {
+        "name": "Grid Export This Year"
+      },
+      "grid_export_total": {
+        "name": "Grid Export Lifetime"
+      },
+      "home_load_power": {
+        "name": "Home Load Power"
+      },
+      "home_load_today": {
+        "name": "Home Consumption Today"
+      },
+      "home_load_month": {
+        "name": "Home Consumption This Month"
+      },
+      "home_load_year": {
+        "name": "Home Consumption This Year"
+      },
+      "home_load_total": {
+        "name": "Home Consumption Lifetime"
+      },
+      "self_sufficiency": {
+        "name": "Solar Self-sufficiency"
+      },
+      "self_consumption": {
+        "name": "Solar Self-consumption"
       }
     }
   }
