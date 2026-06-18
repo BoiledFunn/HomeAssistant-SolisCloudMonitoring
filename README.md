@@ -22,7 +22,7 @@ I have been building this integration in my spare time, so if it helped you, ple
 
 The original integration exposed solar production sensors but not the grid and consumption data needed to make real-time load management decisions. My primary use case is knowing at any moment whether I am generating more power than I am consuming, and by how much — so that Home Assistant can decide when to turn high-load appliances on or off and make the most of free solar generation.
 
-The key sensor for this is `grid_active_power` (API field `psum`): a negative value means the household is drawing from the grid, a positive value means excess solar is being exported. This single sensor is enough to drive automations that shift load into surplus-generation windows.
+The key sensor for this is `grid_active_power` (API field `psum`, negated to match HA convention): a positive value means the household is drawing from the grid, a negative value means excess solar is being exported. This single sensor is enough to drive automations that shift load into surplus-generation windows.
 
 Beyond that, I surfaced all the other fields the `inverterDetail` API endpoint provides — grid import/export energy totals, home consumption, self-sufficiency percentages, reactive power, insulation resistance, and so on. Most of these I have disabled in HA for now since they are noise until I have a specific use for them, but they are there if needed.
 
@@ -81,7 +81,7 @@ Sensors follow the pattern `sensor.solis_<last4serial>_<sensor_key>`, for exampl
 - `current_power` kW — AC output
 - `dc_power` kW — DC input from panels
 - `pv1_power` W, `pv1_voltage` V, `pv1_current` A — PV string 1
-- `grid_active_power` kW — grid meter total (negative = importing, positive = exporting)
+- `grid_active_power` kW — grid meter total (positive = importing from grid, negative = exporting to grid). Follows the HA Energy Dashboard sign convention; the raw Solis `psum` field is negated.
 - `home_load_power` kW — current household consumption
 - `reactive_power` VAR, `power_factor`
 

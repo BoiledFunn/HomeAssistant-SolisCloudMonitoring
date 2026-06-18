@@ -235,7 +235,8 @@ SENSOR_TYPES: tuple[SolisSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.POWER,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=3,
-        value_fn=lambda data: _coerce_float(data.get("psum")),
+        # Solis psum convention is inverted vs HA: negate to match HA (positive = importing)
+        value_fn=lambda data: v * -1 if (v := _coerce_float(data.get("psum"))) is not None else None,
     ),
     SolisSensorEntityDescription(
         key="grid_meter_voltage",
