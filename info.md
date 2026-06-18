@@ -4,7 +4,8 @@ Home Assistant cloud integration for Solis string inverters using the Solis Clou
 
 ## Highlights
 - Asynchronous DataUpdateCoordinator implementation
-- Energy Dashboard ready sensors for production tracking
+- Full Energy Dashboard support — solar production, grid import, and grid export sensors included
+- Real-time grid import/export power, home load power, self-sufficiency and self-consumption percentages
 - Automatic inverter discovery via the Solis Cloud API
 - English translations and config flow localization included
 
@@ -14,5 +15,5 @@ Home Assistant cloud integration for Solis string inverters using the Solis Clou
 - API endpoint hosted on `https://www.soliscloud.com:13333/`
 
 ## Links
-- [Documentation](https://github.com/john-lazarus/HomeAssistant-SolisCloudMonitoring#readme)
-- [Issue tracker](https://github.com/john-lazarus/HomeAssistant-SolisCloudMonitoring/issues)
+- [Documentation](https://github.com/BoiledFunn/HomeAssistant-SolisCloudMonitoring#readme)
+- [Issue tracker](https://github.com/BoiledFunn/HomeAssistant-SolisCloudMonitoring/issues)

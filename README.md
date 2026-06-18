@@ -34,9 +34,9 @@ I have been building this integration in my spare time, so if it helped you, ple
 
 ### HACS (recommended)
 
-<a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=john-lazarus&repository=HomeAssistant-SolisCloudMonitoring&category=integration" target="_blank"><img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open this repository in HACS" width="260"></a>
+<a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=BoiledFunn&repository=HomeAssistant-SolisCloudMonitoring&category=integration" target="_blank"><img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open this repository in HACS" width="260"></a>
 
-1. In HACS, please open `Integrations` → `+ Explore & Add Integrations`.
+1. In HACS, open `Integrations` → `⋮` → `Custom repositories`, add `https://github.com/BoiledFunn/HomeAssistant-SolisCloudMonitoring` with category **Integration**.
 2. Search for **Solis Cloud Monitoring**, open the entry, and click `Download`.
 3. Restart Home Assistant to load the integration.
 
@@ -68,18 +68,48 @@ All detected inverters are monitored. The update interval is fixed at 60 seconds
 Sensors follow the pattern `sensor.solis_<last4serial>_<sensor_key>`, for example `sensor.solis_7177_current_power`. Each inverter appears as a separate device with manufacturer and firmware details.
 
 ## Available sensors
-- `current_power` kW (AC output)
-- `dc_power` kW (DC input)
-- `energy_today`, `energy_month` kWh
-- `energy_year`, `energy_total` MWh
-- `pv1_voltage` V, `pv1_current` A, `pv1_power` W
+
+**Power (real-time)**
+- `current_power` kW — AC output
+- `dc_power` kW — DC input from panels
+- `pv1_power` W, `pv1_voltage` V, `pv1_current` A — PV string 1
+- `grid_active_power` kW — grid meter total (negative = importing, positive = exporting)
+- `home_load_power` kW — current household consumption
+- `reactive_power` VAR, `power_factor`
+
+**Grid electrical**
 - `grid_voltage` V, `grid_current` A, `grid_frequency` Hz
+- `grid_meter_voltage` V, `grid_meter_current` A
+
+**Solar generation energy**
+- `energy_today` kWh, `energy_month` kWh, `energy_year` MWh, `energy_total` MWh
+
+**Grid import energy**
+- `grid_import_today` kWh, `grid_import_month` kWh, `grid_import_year` MWh, `grid_import_total` MWh
+
+**Grid export energy**
+- `grid_export_today` kWh, `grid_export_month` kWh, `grid_export_year` MWh, `grid_export_total` MWh
+
+**Home consumption energy**
+- `home_load_today` kWh, `home_load_month` kWh, `home_load_year` MWh, `home_load_total` MWh
+
+**Self-sufficiency**
+- `self_sufficiency` % — share of home consumption covered by solar
+- `self_consumption` % — share of solar production consumed at home
+
+**Diagnostics**
 - `inverter_temperature` °C
 - `daily_runtime` hours
-- `inverter_state` enum (offline, standby, generating)
+- `insulation_resistance` MΩ
+- `fault_description` — fault/status text from the inverter
+- `inverter_state` enum — `sleeping` / `offline` / `standby` / `generating`
 
 ## Energy Dashboard
-Add `sensor.solis_<serial>_energy_today` to the Solar Production slot. The sensor already exposes the proper device and state classes for the Energy Dashboard.
+- **Solar production:** `sensor.solis_<serial>_energy_today`
+- **Grid consumption (import):** `sensor.solis_<serial>_grid_import_today`
+- **Return to grid (export):** `sensor.solis_<serial>_grid_export_today`
+
+All three sensors expose the correct device class and state class for the HA Energy Dashboard. Use `grid_active_power` for a real-time import/export gauge (negative = importing).
 
 ## Troubleshooting
 - `invalid_auth`: API key or secret rejected. Regenerate the credentials in Solis Cloud if needed.
