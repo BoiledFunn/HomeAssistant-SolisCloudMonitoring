@@ -18,6 +18,14 @@ I have been building this integration in my spare time, so if it helped you, ple
 	</a>
 </p>
 
+## Why this fork
+
+The original integration exposed solar production sensors but not the grid and consumption data needed to make real-time load management decisions. My primary use case is knowing at any moment whether I am generating more power than I am consuming, and by how much — so that Home Assistant can decide when to turn high-load appliances on or off and make the most of free solar generation.
+
+The key sensor for this is `grid_active_power` (API field `psum`): a negative value means the household is drawing from the grid, a positive value means excess solar is being exported. This single sensor is enough to drive automations that shift load into surplus-generation windows.
+
+Beyond that, I surfaced all the other fields the `inverterDetail` API endpoint provides — grid import/export energy totals, home consumption, self-sufficiency percentages, reactive power, insulation resistance, and so on. Most of these I have disabled in HA for now since they are noise until I have a specific use for them, but they are there if needed.
+
 ## Features
 - Polls the Solis Cloud `inverterDetail` endpoint every 60 seconds
 - Discovers up to five inverters linked to the API user automatically
